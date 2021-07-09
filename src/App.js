@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, useEffect} from 'react'
+//import loginService from './services/login'
 
-function App() {
+const App = () => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  //const [user, setUser] = useState(null)
+  //const [errorMessage, setErrorMessage] = useState('')
+
+  const handleUsername = event => {
+    setUsername(event.target.value)
+  }
+  const handlePassword = event => {
+    setPassword(event.target.value)
+  }
+
+  /*
+  const handleLogin = async event => {
+    event.preventDefault()
+    try {
+      const user = await loginService.login({username, password})
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    }
+    catch {
+      setErrorMessage("Wrong username or password")
+      setTimeout(() => {
+        setErrorMessage('')
+      }, 5000)
+    }
+  }
+  */
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1> Login To The Bloglist App </h1>
+      <form> 
+        <div> 
+          Username:
+          <input 
+          type = "text"
+          value = {username}
+          onChange = {handleUsername}
+          />
+        </div>
+        <div>
+          Password:
+          <input 
+          type = "password"
+          value = {password}
+          onChange = {handlePassword}
+          /> 
+        </div>
+        <div>
+          <button type = "submit"> Login </button>
+        </div>
+      </form>
     </div>
-  );
+  )
 }
-
-export default App;
+export default App 
