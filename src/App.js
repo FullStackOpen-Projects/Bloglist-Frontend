@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from 'react'
-//import loginService from './services/login'
+import React, {useState} from 'react'
+import loginService from './services/login'
 
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  //const [user, setUser] = useState(null)
-  //const [errorMessage, setErrorMessage] = useState('')
 
   const handleUsername = event => {
     setUsername(event.target.value)
@@ -14,28 +12,23 @@ const App = () => {
     setPassword(event.target.value)
   }
 
-  /*
   const handleLogin = async event => {
     event.preventDefault()
     try {
-      const user = await loginService.login({username, password})
-      setUser(user)
+      await loginService.login({username, password})
       setUsername('')
       setPassword('')
     }
     catch {
-      setErrorMessage("Wrong username or password")
-      setTimeout(() => {
-        setErrorMessage('')
-      }, 5000)
+      console.log("Wrong username or password")
     }
   }
-  */
+  
 
   return (
     <div>
       <h1> Login To The Bloglist App </h1>
-      <form> 
+      <form onSubmit = {handleLogin}> 
         <div> 
           Username:
           <input 
