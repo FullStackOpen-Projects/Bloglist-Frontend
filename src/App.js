@@ -19,7 +19,7 @@ const App = () => {
       setUsername('')
       setPassword('')
     }
-    catch {
+    catch (exception) {
       console.log("Wrong username or password")
     }
   }
