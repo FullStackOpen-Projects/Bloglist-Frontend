@@ -4,6 +4,7 @@ import loginService from './services/login'
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleUsername = event => {
     setUsername(event.target.value)
@@ -20,7 +21,7 @@ const App = () => {
       setPassword('')
     }
     catch (exception) {
-      console.log("Wrong username or password")
+      setErrorMessage("Wrong username or password")
     }
   }
   
@@ -45,6 +46,7 @@ const App = () => {
           onChange = {handlePassword}
           /> 
         </div>
+        <p> {errorMessage} </p>
         <div>
           <button type = "submit"> Login </button>
         </div>
