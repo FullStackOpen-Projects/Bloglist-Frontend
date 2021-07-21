@@ -5,6 +5,7 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
+  const [user, setUser] = useState(null)
 
   const handleUsername = event => {
     setUsername(event.target.value)
@@ -16,7 +17,8 @@ const App = () => {
   const handleLogin = async event => {
     event.preventDefault()
     try {
-      await loginService.login({username, password})
+      const user = await loginService.login({username, password})
+      setUser(user)
       setUsername('')
       setPassword('')
     }
@@ -25,10 +27,9 @@ const App = () => {
     }
   }
   
-
-  return (
+  const login = () => (
     <div>
-      <h1> Login To The Bloglist App </h1>
+      <h1> Login to the Bloglist App </h1>
       <form onSubmit = {handleLogin}> 
         <div> 
           Username:
@@ -52,6 +53,14 @@ const App = () => {
         </div>
       </form>
     </div>
+  ) 
+
+
+  return (
+    <div>
+    {user === null && login()}
+    </div>
   )
 }
+
 export default App 
