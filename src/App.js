@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import loginService from './services/login'
+import { displayUserBlogs, getUserBlogs } from './services/blog'
 
 const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState('')
   const [user, setUser] = useState(null)
+  const [blogs, setBlogs] = useState(null)
 
   const handleUsername = event => {
     setUsername(event.target.value)
@@ -18,7 +20,10 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({username, password})
+      const blogs = await getUserBlogs(user)
+
       setUser(user)
+      setBlogs(blogs)
       setUsername('')
       setPassword('')
     }
@@ -59,6 +64,7 @@ const App = () => {
   return (
     <div>
     {user === null && login()}
+    {blogs !== null && displayUserBlogs(user, blogs.blogs)}
     </div>
   )
 }
